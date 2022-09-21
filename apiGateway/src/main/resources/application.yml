@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: payments
+          uri: http://localhost:8085/
+          predicates:
+            - Path=/payments/**
+        - id: auth
+          uri: http://localhost:9090/
+          predicates:
+            - Path=/login
+        - id: doctor
+          uri: http://localhost:8081
+          predicates:
+            - Path=/doctors/**
+        - id: appointment
+          uri: http://localhost:8087
+          predicates:
+            - Path=/doctor/**
+        - id: appointment
+          uri: http://localhost:8087
+          predicates:
+            - Path=/appointments/**
+        - id: appointment
+          uri: http://localhost:8087
+          predicates:
+            - Path=/users/{userId}/appointments
+        - id: appointment
+          uri: http://localhost:8087
+          predicates:
+            - Path=/prescriptions
+        - id: user
+          uri: http://localhost:8083
+          predicates:
+            - Path=/users/**
+        - id: rating
+          uri: http://localhost:8090
+          predicates:
+            - Path=/ratings

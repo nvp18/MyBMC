@@ -1,0 +1,71 @@
+version: '3.3'
+services:
+  userService:
+    # Configuration for building the docker image for the backend service
+    build: userService
+    container_name: userService
+    image: bmc/userService:1.0.0
+    ports:
+      - "8083:8083" # Forward the exposed port 8083 to port 8083 on the host machine
+    networks:
+      - microservicesnet
+  apiGateway:
+    build: apiGateway
+    container_name: apiGateway
+    image: bmc/apiGateway:1.0.0
+    ports:
+      - "8080:8080" # Map the exposed port 8080 on container to port 8080 on the host machine
+    networks:
+      - microservicesnet
+  appointmentService:
+    build: appointmentService
+    container_name: appointmentService
+    image: bmc/appointmentService:1.0.0
+    ports:
+      - "8087:8087" # Map the exposed port 8087 on container to port 8087 on the host machine
+    networks:
+      - microservicesnet
+  authService:
+    build: authService
+    container_name: authService
+    image: bmc/authService:1.0.0
+    ports:
+      - "9090:9090" # Map the exposed port 9090 on container to port 9090 on the host machine
+    networks:
+      - microservicesnet
+  doctorService:
+    build: doctorService
+    container_name: doctorService
+    image: bmc/doctorService:1.0.0
+    ports:
+      - "8081:8081" # Map the exposed port 8081 on container to port 8081 on the host machine
+    networks:
+      - microservicesnet
+  notificationService:
+    build: notificationService
+    container_name: notificationService
+    image: bmc/notificationService:1.0.0
+    ports:
+      - "8095:8095" # Map the exposed port 8095 on container to port 8095 on the host machine
+    networks:
+      - microservicesnet
+  paymentService:
+    build: paymentService
+    container_name: paymentService
+    image: bmc/paymentService:1.0.0
+    ports:
+      - "8085:8085" # Map the exposed port 8085 on container to port 8085 on the host machine
+    networks:
+      - microservicesnet
+  ratingService:
+    build: ratingService
+    container_name: ratingService
+    image: bmc/ratingService:1.0.0
+    ports:
+      - "8090:8090" # Map the exposed port 8090 on container to port 8090 on the host machine
+    networks:
+      - microservicesnet
+
+networks:
+  microservicesnet:
+    driver: bridge
